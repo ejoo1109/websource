@@ -8,7 +8,9 @@
 			<h3 class="box-title">List Board</h3>
 		</div>
 		<div class="row">
-			<div class="col-md-4"></div><!--글쓰기 버튼-->
+			<div class="col-md-4"><!--글쓰기 버튼-->
+				<input type="button" value="글작성" class="btn btn-success" onclick="location.href='view/qna_board_write.jsp'" />
+			</div>
 			<div class="col-md-4 offset-md-4"><!--검색 들어갈 부분-->
 			</div>
 		</div>
@@ -21,19 +23,21 @@
 				<th class='text-center'>날짜</th>
 				<th class='text-center' style='width:100px'>조회수</th>
 			</tr>
+ 		<c:forEach var="vo" items="${list}">
 			<tr><!-- 리스트 목록 보여주기 -->
-				<td class='text-center'></td><!--번호-->
-				<td></td><!--제목-->
-				<td class='text-center'></td><!--작성자-->
-				<td class='text-center'></td><!--날짜-->
-				<td class='text-center'><span class="badge badge-pill badge-primary"></span></td>
-			</tr>		
+				<td class='text-center'>${vo.bno}</td><!--번호-->
+				<td><a href="qHitUpdate.do?bno=${vo.bno}">${vo.title}</a></td><!--제목-->
+				<td class='text-center'>${vo.name}</td><!--작성자-->
+				<td class='text-center'>${vo.regdate}</td><!--날짜-->
+				<td class='text-center'><span class="badge badge-pill badge-primary">${vo.readcount}</span></td>
+			</tr>	
+		</c:forEach>	
 		</table>
 		<div class="container">
 			<div class="row  justify-content-md-center">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination"><!--하단의 페이지 나누기 부분-->
-
+				  
 				  </ul>
 				</nav>					
 			</div>

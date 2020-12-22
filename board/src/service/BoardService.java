@@ -14,4 +14,6 @@ public interface BoardService {
 	public List<BoardVO> getList();
 	//게시글 특정 번호 조회
 	public BoardVO getRow(int bno);
+	//조회수 업데이트
+	public boolean hitUpdate(int bno);
 }

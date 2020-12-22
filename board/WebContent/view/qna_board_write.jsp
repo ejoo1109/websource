@@ -75,7 +75,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
         <div class="form-group text-center">
           <button type="submit" class="btn btn-primary">등록</button>
           <button type="reset" class="btn btn-danger">다시작성</button>
-          <button type="button" class="btn btn-warning" id="list">
+          <button type="button" class="btn btn-warning" id="list" onclick="location.href='../qList.do'">
             목록보기
           </button>
         </div>

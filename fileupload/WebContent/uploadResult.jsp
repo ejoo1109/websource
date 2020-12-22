@@ -8,21 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-/* 	request.setCharacterEncoding("utf-8");
-	String title = request.getParameter("title");
-	String content = request.getParameter("content");
-	String file1 = request.getParameter("file1");
-	String file2 = request.getParameter("file2");
-
-
-	out.print("<ul>");
-	out.print("<li>title : " +title+ "</li>");
-	out.print("<li>content : " +content+ "</li>");
-	out.print("<li>file1 : " +file1+ "</li>");
-	out.print("<li>file2 : " +file2+ "</li>");
-	out.print("</ul>"); */
-	
-	
  	//file upload 요청 파악하기
  	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	
@@ -36,16 +21,16 @@
 		//리스트에서 하나씩 꺼내기 for(MemberVO vo:list),Iterator
 		
 		
-		String fileName = null, filedName = null, vlaue= null;
+		String fileName = null, filedName = null, value= null;
 		Iterator<FileItem> iter = fileItems.iterator();
 		while(iter.hasNext()){
 			FileItem item = iter.next();
 			
 			if(item.isFormField()){ //input type= file이 아닌것들 구별
 				filedName = item.getFieldName();
-				vlaue= item.getString("utf-8");
+				value= item.getString("utf-8");
 				out.print("<h3>일반 데이터</h3>");
-				out.print(filedName+" : "+vlaue+"<br>");
+				out.print(filedName+" : "+value+"<br>");
 			}else{					//input type=file인 것만 출력하고 저장
 				filedName=item.getFieldName(); //파일이름
 				fileName=item.getName(); //파일명

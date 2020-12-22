@@ -50,7 +50,7 @@
 		  	//for(BookVO vo:list) {  %>
 		  	<c:forEach var="vo" items="${list}">		  
 	 <tr>
-	 	<td>$vo.code</td>
+	 	<td>${vo.code}</td>
 	 	<td>${vo.title}</td>
 	 	<td>${vo.writer}</td>
 	 	<td>${vo.price}</td> 

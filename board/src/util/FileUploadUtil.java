@@ -2,8 +2,10 @@ package util;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +17,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class FileUploadUtil {
 	
-	public void uploadFile(HttpServletRequest request) {
+	public Map<String, String> uploadFile(HttpServletRequest request) {
 		//file upload 요청 파악하기
 	 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+	 	
+	 	//사용자로부터 넘어온 데이터를 담기 위한 구조 생성
+	 	Map<String, String> map = new HashMap<String, String>();
 	 	
 	 	if(isMultipart){
 			//전송된 파일을 디스크에 저장하기 위한 객체 생성
@@ -32,7 +37,7 @@ public class FileUploadUtil {
 				e.printStackTrace();
 			}
 			
-			String fileName = null, filedName = null, vlaue= null;
+			String fileName = null, filedName = null, value= null;
 			Iterator<FileItem> iter = fileItems.iterator();
 			while(iter.hasNext()){
 				FileItem item = iter.next();
@@ -40,7 +45,8 @@ public class FileUploadUtil {
 				if(item.isFormField()){ //input type= file이 아닌것들 구별
 					filedName = item.getFieldName();
 					try {
-						vlaue= item.getString("utf-8");
+						value= item.getString("utf-8");
+						map.put(filedName, value); //맵구조에 자료 담기
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					}
@@ -48,26 +54,25 @@ public class FileUploadUtil {
 				}else{					//input type=file인 것만 출력하고 저장
 					filedName=item.getFieldName(); //파일이름
 					fileName=item.getName(); //파일명
-					long size = item.getSize(); //파일크기
-
 
 					//파일 저장하기
 					String path = "c:\\upload"; //서버 저장장소
 					if(!fileName.isEmpty()){
-
+						//아이디 생성
 						UUID uuid = UUID.randomUUID();
 
 						File uploadFile = new File(path+"\\"+uuid.toString()+"_"+fileName);
+					
+						map.put(filedName, uploadFile.getName());
+						
 						try {
 							item.write(uploadFile);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-
-
 					}
 				}
 			}
-	 	}
-	}
+	 	}return map;
+	} 
 }
