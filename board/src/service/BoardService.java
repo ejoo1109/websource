@@ -8,7 +8,7 @@ public interface BoardService {
 	//CRUD
 	public boolean insertArticle(BoardVO vo);
 	public boolean updateArticle(BoardVO vo);
-	public boolean deleteArticle(BoardVO vo);
+	public boolean deleteArticle(int bno, String password);
 	
 	//게시글 전체조회
 	public List<BoardVO> getList();

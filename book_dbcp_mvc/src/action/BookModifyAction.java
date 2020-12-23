@@ -30,7 +30,7 @@ public class BookModifyAction implements Action {
 		boolean flag = service.updateBook(vo);
 		
 		if(!flag) {
-			path="index";
+			path="index.html";
 		}
 		return new ActionForward(path,true);
 }

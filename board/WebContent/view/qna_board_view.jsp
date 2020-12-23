@@ -1,3 +1,5 @@
+<%@page import="domain.BoardVO"%>
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
@@ -13,26 +15,38 @@
 				<div class="form-group row">
 					<label for="name" class="col-sm-2 col-form-label">글쓴이</label>
 					<div class="col-sm-10">
-						<input type="text" name="name" size="10" class="form-control" maxlength='10' value="${vo.name}">
+						<input type="text" name="name" size="10" class="form-control" maxlength='10' value="${vo.name}" readonly>
 					</div>
 				</div>
 				<div class="form-group  row">
 					<label for="title" class="col-sm-2 col-form-label">제목</label>
 					<div class="col-sm-10">
-						<input type="text" name="title" size="50" class="form-control"	maxlength='100' value="${vo.title}">
+						<input type="text" name="title" size="50" class="form-control"	maxlength='100' value="${vo.title}"readonly>
 					</div>
 				</div>
 				<div class="form-group  row">
 					<label for="content" class="col-sm-2 col-form-label">내용</label>
 					<div class="col-sm-10">
-						<textarea name='board_content' cols='60' class="form-control" rows='15'>${vo.content}</textarea>
+						<textarea name='board_content' cols='60' class="form-control" rows='15'readonly>${vo.content}</textarea>
 					</div>
 				</div>
 				<div class="form-group  row">
 					<label for="filename" class="col-sm-2 col-form-label">파일첨부</label>
 					<div class="col-sm-10">
-						${vo.attach}
-					</div>
+				<%
+				BoardVO board = (BoardVO)request.getAttribute("vo");
+				String attachFullName = board.getAttach();
+							
+				if(attachFullName!=null){
+						
+					
+				out.print("<a href='view/download.jsp?fileName="+URLEncoder.encode(attachFullName,"utf-8")+"'>");
+				out.print(attachFullName);
+				out.print("</a>");
+				
+					}
+				%>
+				</div>
 				</div>
 				<div style="height:10px"></div>
 				<div class="box-footer text-center">
@@ -46,17 +60,28 @@
 		</form>
 	</div>
 </section>
+<!-- 페이지나누기할때 같이 가져가야할 값들 -->
+<form action="" method="post" role="form">
+	<input type="hidden" name="bno" value="${vo.bno}"/>
+</form>
 <!-- 단순 경로이동이 아니라서 script로 따로 작성 -->
 <script>
 $(function(){
+	
+	var formObj = $("form[role='form']");
+	
 	$("#reply").click(function(){
-		
+		formObj.attr('action','qReplyView.do');
+		formObj.submit();
 	})
 	$("#modify").click(function(){
-	
+		formObj.attr('action','qModify.do');
+		formObj.submit();	
 	})
 	$("#delete").click(function(){
-		
+		//링크걸기방식-	location.href = 'view/qna_board_pwdCheck.jsp';
+		formObj.attr('action','view/qna_board_pwdCheck.jsp');
+		formObj.submit();	
 	})
 	$("#list").click(function(){
 		location.href = 'qList.do';
