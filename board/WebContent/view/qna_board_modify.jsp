@@ -48,7 +48,7 @@
 				out.print(attachFullName);
 				out.print("</a>");
 				}else{//파일 첨부가 되어있다면 첨부한 파일 보여주고, 첨부가 안되어 있으면 첨부를 추가할수 있게끔 설정
-					out.print("<input type='file'> <name='attach'>");
+					out.print("<input type='file' name='attach'>");
 					out.print("<small class='text-muted'>(파일크기 : 2MB)</small>");
 					}
 				
