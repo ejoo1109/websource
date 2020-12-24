@@ -27,7 +27,7 @@
 				<div class="form-group row">
 					<label for="content" class="col-sm-2 col-form-label">내용</label>
 					<div class="col-sm-10">
-						<textarea name='content' cols='60' class="form-control" rows='15' value="${vo.content}"></textarea>
+						<textarea name='content' cols='60' class="form-control" rows='15'>${vo.content}</textarea>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -44,9 +44,9 @@
 				String attachFullName = board.getAttach();
 							
 				if(attachFullName!=null){
-				out.print("<a href='view/download.jsp?fileName="+URLEncoder.encode(attachFullName,"utf-8")+"'>");
-				out.print(attachFullName);
-				out.print("</a>");
+					out.print("<a href='view/download.jsp?fileName="+URLEncoder.encode(attachFullName,"utf-8")+"'>");
+					out.print(attachFullName);
+					out.print("</a>");
 				}else{//파일 첨부가 되어있다면 첨부한 파일 보여주고, 첨부가 안되어 있으면 첨부를 추가할수 있게끔 설정
 					out.print("<input type='file' name='attach'>");
 					out.print("<small class='text-muted'>(파일크기 : 2MB)</small>");
@@ -62,6 +62,7 @@
 				</div>
 				<div style="height:20px"></div>
 			</div>
+			<!-- update에서 map에 담은 bno 값을 넘겨줘야함 -->
 			<input type="hidden" name="bno" value="${vo.bno}"/>
 		</form>
 	</div>
@@ -73,12 +74,12 @@ $(function(){
 	
 	$(inputFile).change(function(){
 		//파일첨부시 읽어오는 이름,사이즈
-		let files=inputFile[0].files;
-		let fileName=files[0].name;
-		let fileSize=files[0].size;
+		let files = inputFile[0].files;
+		let fileName = files[0].name;
+		let fileSize = files[0].size;
 	
 		//확장자 제한(txt|jpg|png|gif)
-		var reg = /(.*?)\.(txt|jpg|png|gif)$/;
+		var reg = "/(.*?)\.(txt|jpg|png|gif)$/";
 		
 		//사이즈 제한 (2MB)
 		var maxSize = 2097152;

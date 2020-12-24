@@ -19,6 +19,7 @@ public class BoardModifyAction implements Action {
 		//서비스요청 : bno에 해당하는 게시물 가져오기
 		BoardService service = new BoardServiceImpl();
 		BoardVO vo = service.getRow(bno);
+		
 		request.setAttribute("vo", vo);
 		//결과에 따른 이동
 		return new ActionForward(path, false);

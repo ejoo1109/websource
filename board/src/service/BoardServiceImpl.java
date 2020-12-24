@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import domain.BoardVO;
+import domain.SearchVO;
 import persistence.BoardDAO;
 import static persistence.JDBCUtil.*;
 public class BoardServiceImpl implements BoardService {
@@ -44,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
 			rollback(con);
 		}
 		close(con);
-		return false;
+		return updateFlag;
 	}
 
 	@Override
@@ -62,8 +63,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getList() {
-		List<BoardVO> list=dao.selectAll();
+	public List<BoardVO> getList(SearchVO searchVO) {
+	//	List<BoardVO> list=dao.selectAll();
+		List<BoardVO> list=dao.getList(searchVO);
 		close(con);
 		return list;
 	}
@@ -89,5 +91,25 @@ public class BoardServiceImpl implements BoardService {
 		close(con);
 		return updateFlag;
 	}
+	@Override
+	public boolean insertReply(BoardVO reply) {
+		boolean replyFlag = false;
+		
+		int result = dao.reply(reply);
+		if (result>0) {
+			commit(con);
+			replyFlag=true;
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return replyFlag;
+	}
+//	@Override
+//	public List<BoardVO> searchList(SearchVO searchVO) {
+//		List<BoardVO> search=dao.searchAll(searchVO);
+//		close(con);
+//		return search;
+//	}
 
 }

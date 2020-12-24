@@ -60,3 +60,43 @@ select bno,name,title,re_ref,re_lev,re_seq from board
 where re_ref=2310 order by re_seq;
 
 
+--페이지 나누기
+
+--rownum : order by 절과 사용할때 order by를 적용할 컬럼이 index가 아니라면 
+--제대로 결과를 만들어주지 않는다.
+
+--bno : pk값으로 설정했기 때문에 자동으로 인덱스 처리
+select rownum,bno,title from board order by bno desc;
+select rownum,bno,title from board order by re_ref desc, re_seq asc;
+
+-- 10개의 레코드만 최신순으로 조회
+select rownum,bno,title from board where rownum<=10 order by bno desc;
+select rownum,bno,title from board where rownum<=10 order by re_ref desc, re_seq asc;
+
+--인덱스 컬럼이 아닌 경우 해결(인라인방식) bno>0 이용시 조회 기능이 향상됨
+select rownum,bno,title
+from(select bno,title from board where bno>0 order by re_ref desc, re_seq asc)
+where rownum<=10;
+
+-- 1 page => 가장 최신글 10개 가져오기
+select bno,title
+from(select rownum rnum,bno,title
+		from(select bno,title 
+				from board 
+				where bno>0 order by re_ref desc, re_seq asc)
+		where rownum<=10)
+where rnum>0;
+
+-- 2 page => 가장 최신글 11~20 가져오기
+select bno,title,name, regdate,readcount,re_lev
+from(select rownum rnum,bno,title,name, regdate,readcount,re_lev
+		from(select bno,title,name, regdate,readcount,re_lev
+				from board 
+				where bno>0 order by re_ref desc, re_seq asc)
+		where rownum<=20)
+where rnum>10;
+
+-- 자바페이지에서는 sql의 rownum<=?,rnum>? 으로 들어가는데 처리될수 있도록 식을 세움 
+-- 1 => 0, 10 (1~10) (1-1)*10, 1*10 1:페이지값 10:보여줄 개수
+-- 2 => 10, 20 (11~20) (2-1)*10, 2*10
+-- 3 => 20, 30 (21~30) (3-1)*10, 3*10

@@ -38,12 +38,10 @@
 				String attachFullName = board.getAttach();
 							
 				if(attachFullName!=null){
-						
+					out.print("<a href='view/download.jsp?fileName="+URLEncoder.encode(attachFullName,"utf-8")+"'>");
+					out.print(attachFullName);
+					out.print("</a>");
 					
-				out.print("<a href='view/download.jsp?fileName="+URLEncoder.encode(attachFullName,"utf-8")+"'>");
-				out.print(attachFullName);
-				out.print("</a>");
-				
 					}
 				%>
 				</div>

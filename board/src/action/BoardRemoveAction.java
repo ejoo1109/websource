@@ -25,7 +25,7 @@ public class BoardRemoveAction implements Action {
 		
 		//요청 결과에 따라 이동
 		//비번틀리면 qna_board_pwdCheck.jsp 이동
-		if(!result) path="view/qna_board_pwdCheck.jsp";
+		if(!result) path="../qna_board_pwdCheck.jsp";
 	
 		return new ActionForward(path,true);
 	}

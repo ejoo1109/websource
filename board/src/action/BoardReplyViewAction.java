@@ -18,6 +18,7 @@ public class BoardReplyViewAction implements Action {
 		
 		BoardService service = new BoardServiceImpl();
 		BoardVO vo = service.getRow(bno);
+		
 		request.setAttribute("vo", vo);
 		
 		
