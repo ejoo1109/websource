@@ -59,6 +59,7 @@ values(board_seq.nextval,'choi','1234','Re:댓글연습','댓글 연습중',null
 select bno,name,title,re_ref,re_lev,re_seq from board 
 where re_ref=2310 order by re_seq;
 
+select * from board;
 
 --페이지 나누기
 
@@ -100,3 +101,8 @@ where rnum>10;
 -- 1 => 0, 10 (1~10) (1-1)*10, 1*10 1:페이지값 10:보여줄 개수
 -- 2 => 10, 20 (11~20) (2-1)*10, 2*10
 -- 3 => 20, 30 (21~30) (3-1)*10, 3*10
+
+--검색어가 들어오지 않는 경우의 전체 행 수
+select count(*) from board;
+--검색어가 들어오는 경우의 게시물 행 수
+select count(*) from board where criteria=title and keyword='제목';

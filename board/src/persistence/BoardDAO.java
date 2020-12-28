@@ -104,6 +104,39 @@ public class BoardDAO {
 //		return search;
 //	}//검색기능 종료
 	
+	//전체 행 수 가져오기
+	//100개의 행 => 한 페이지에 10개씩 => 1~10 (1 2 3 4 5 6 7 8 9 10)
+	//91개의 행 => 10개의 페이지
+	
+	public int totalRows(String criteria, String keyword) {
+		String sql="";
+		int totalRow=0;	
+		try {
+			
+		//	if(criteria!=null) {
+			if(!criteria.isEmpty()) {
+				//검색 조건에 맞는 행 수 구하기
+				sql = "select count(*) from board where "+criteria+" like ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+			}else {
+				//전체 게시물 수 구하기
+				sql = "select count(*) from board";
+				pstmt = con.prepareStatement(sql);
+			}
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totalRow = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return totalRow;
+	}
+	
 	// 전체 조회 list + 검색 리스트 search 구현
 	public List<BoardVO> getList(SearchVO searchVO){	
 		
@@ -126,7 +159,8 @@ public class BoardDAO {
 			
 			String sql="";
 			
-			if(searchVO.getCriteria()!=null) { //검색
+		//	if(searchVO.getCriteria()!=null) { //검색
+			if(!searchVO.getCriteria().isEmpty()) {
 			//	sql="select bno, title, name, regdate,readcount,re_lev from board ";
 			//	sql+="where "+searchVO.getCriteria()+" like ? order by re_ref desc,re_seq asc";
 	
@@ -325,5 +359,6 @@ public class BoardDAO {
 		}
 		return result;
 		
-	}
+	}//답글달기 종료
+	
 }

@@ -61,6 +61,9 @@
 <!-- 페이지나누기할때 같이 가져가야할 값들 -->
 <form action="" method="post" role="form">
 	<input type="hidden" name="bno" value="${vo.bno}"/>
+	<input type="hidden" name="page" value="${searchVO.page}"/>
+	<input type="hidden" name="criteria" value="${searchVO.criteria}"/>
+	<input type="hidden" name="keyword" value="${searchVO.keyword}"/>
 </form>
 <!-- 단순 경로이동이 아니라서 script로 따로 작성 -->
 <script>
@@ -82,7 +85,8 @@ $(function(){
 		formObj.submit();	
 	})
 	$("#list").click(function(){
-		location.href = 'qList.do';
+		formObj.attr('action','qList.do');
+		formObj.submit();	
 	})
 })
 </script>

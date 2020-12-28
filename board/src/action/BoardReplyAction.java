@@ -1,5 +1,7 @@
 package action;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,15 +27,20 @@ public class BoardReplyAction implements Action {
 		vo.setRe_ref(Integer.parseInt(request.getParameter("re_ref")));
 		vo.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
 		vo.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
+		//페이지 나누기 값들
+		String page = request.getParameter("page");
+		String criteria = request.getParameter("criteria");
+		String keyword=URLEncoder.encode(request.getParameter("keyword"),"utf-8");
 		
 		//서비스 요청
 		BoardService service = new BoardServiceImpl();
 		boolean result = service.insertReply(vo);
 		//결과에 따라 이동
 		if(!result) {//실패시 이동
-			path = "qView.do?bno="+request.getParameter("bno");
-		}
-		return new ActionForward(path,true);
+			path = "qView.do?bno="+request.getParameter("bno")+"&page="+page+"&criteria="+criteria+"&keyword="+keyword;
+		}else {
+			path += "?page="+page+"&criteria="+criteria+"&keyword="+keyword;		
 	}
-
+		return new ActionForward(path,true);
+}
 }

@@ -41,6 +41,8 @@ public class BoardWriteAction implements Action {
 		
 		if(!flag) {
 			path = "view/qna_board_write.jsp";
+		}else {
+			path += "?page=1&criteria=&keyword=";
 		}
 		return new ActionForward(path,true);
 	}

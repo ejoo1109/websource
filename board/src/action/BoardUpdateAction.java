@@ -1,5 +1,6 @@
 package action;
 
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +35,21 @@ public class BoardUpdateAction implements Action {
 				if(map.containsKey("attach")) {
 					vo.setAttach(map.get("attach"));
 				}
+				
+				//페이지 나누기 후 넘어오는 값
+				String page = map.get("page");
+				String criteria = map.get("criteria");
+				String keyword = URLEncoder.encode(map.get("keyword"),"utf-8");
+				
 				//서비스 호출
 				BoardService service = new BoardServiceImpl();
 				boolean flag = service.updateArticle(vo);
 				
 				//수정 성공시 수정된 내용 보여주기(qView.do)
 				if(!flag) {//수정실패 qModify.do도 bno가 필요하기 때문에 bno를 보내줘야한다.
-					path = "qModify.do?bno="+map.get("bno");
+					path = "qModify.do?bno="+map.get("bno")+"&page="+page+"&criteria="+criteria+"&keyword="+keyword;;
 				}else {//수정성공시 qView.do로 이동할거라서 bno를 보내줘야한다.
-					path += "?bno="+map.get("bno");
+					path += "?bno="+map.get("bno")+"&page="+page+"&criteria="+criteria+"&keyword="+keyword;;
 				}
 				return new ActionForward(path,true);
 	}

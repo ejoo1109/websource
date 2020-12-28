@@ -64,6 +64,10 @@
 			</div>
 			<!-- update에서 map에 담은 bno 값을 넘겨줘야함 -->
 			<input type="hidden" name="bno" value="${vo.bno}"/>
+			<%--페이지 나누기에  대한 정보--%>
+			<input type="hidden" name="page" value="${searchVO.page}"/>
+			<input type="hidden" name="criteria" value="${searchVO.criteria}"/>
+			<input type="hidden" name="keyword" value="${searchVO.keyword}"/>
 		</form>
 	</div>
 </section>

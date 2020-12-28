@@ -105,11 +105,21 @@ public class BoardServiceImpl implements BoardService {
 		close(con);
 		return replyFlag;
 	}
+	
+	@Override
+	public int getRows(String criteria, String keyword) {
+		int totalRow = dao.totalRows(criteria,keyword);
+		close(con);
+		return totalRow;
+	}
+	
+	
 //	@Override
 //	public List<BoardVO> searchList(SearchVO searchVO) {
 //		List<BoardVO> search=dao.searchAll(searchVO);
 //		close(con);
 //		return search;
 //	}
+
 
 }

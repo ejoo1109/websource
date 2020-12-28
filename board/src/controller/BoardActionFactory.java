@@ -2,7 +2,7 @@ package controller;
 
 import action.Action;
 import action.BoardHitUpdateAction;
-import action.BoardListAciton;
+import action.BoardListAction;
 import action.BoardModifyAction;
 import action.BoardRemoveAction;
 import action.BoardReplyAction;
@@ -28,7 +28,7 @@ public class BoardActionFactory {
 			action = new BoardWriteAction("qList.do");
 			
 		}else if(cmd.equals("/qList.do")) {
-			action = new BoardListAciton("view/qna_board_list.jsp");
+			action = new BoardListAction("view/qna_board_list.jsp");
 			
 		}else if(cmd.equals("/qView.do")) {
 			action = new BoardViewAction("view/qna_board_view.jsp");

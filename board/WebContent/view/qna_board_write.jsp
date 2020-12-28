@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
+<%
+	//page는 위에 이미 값이 있기때문에 중복사용불가
+	String page1 = request.getParameter("page"); 
+	String criteria = request.getParameter("criteria");
+	String keyword = request.getParameter("keyword");
+
+%>
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary">
@@ -75,7 +82,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
         <div class="form-group text-center">
           <button type="submit" class="btn btn-primary">등록</button>
           <button type="reset" class="btn btn-danger">다시작성</button>
-          <button type="button" class="btn btn-warning" id="list" onclick="location.href='../qList.do'">
+          <button type="button" class="btn btn-warning" id="list" onclick="location.href='../qList.do?page=<%=page1%>&criteria=<%=criteria%>&keyword=<%=keyword%>'">
             목록보기
           </button>
         </div>

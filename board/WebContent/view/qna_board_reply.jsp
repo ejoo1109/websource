@@ -51,6 +51,10 @@
 			<input type="hidden" name="re_ref" value="${vo.re_ref}"/>
 			<input type="hidden" name="re_lev" value="${vo.re_lev}"/>
 			<input type="hidden" name="re_seq" value="${vo.re_seq}"/>
+			<%--페이지 나누기에  대한 정보--%>
+			<input type="hidden" name="page" value="${searchVO.page}"/>
+			<input type="hidden" name="criteria" value="${searchVO.criteria}"/>
+			<input type="hidden" name="keyword" value="${searchVO.keyword}"/>
 		</form>
 	</div>
 </section>

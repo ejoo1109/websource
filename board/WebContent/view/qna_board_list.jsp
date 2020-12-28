@@ -9,17 +9,17 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4"><!--글쓰기 버튼-->
-				<input type="button" value="글작성" class="btn btn-success" onclick="location.href='view/qna_board_write.jsp'" />
+				<input type="button" value="글작성" class="btn btn-success" onclick="location.href='view/qna_board_write.jsp?&page=${info.search.page}&criteria=${info.search.criteria}&keyword=${info.search.keyword}'" />
 			</div>
 			<div class="col-md-4 offset-md-4"><!--검색 들어갈 부분-->
 				<form action="qList.do" method="post" id="search">
 					<select name="criteria" id="criteria">
-						<option value="n" <c:out value="${empty search.criteria?'selected':''}"/>>----</option>
-						<option value="title" <c:out value="${search.criteria == 'title'?'selected':''}"/>>title</option>
-						<option value="content" <c:out value="${search.criteria=='content'?'selected':''}"/>>content</option>
-						<option value="name" <c:out value="${search.criteria=='name'?'selected':''}"/>>name</option>
+						<option value="n" <c:out value="${empty info.search.criteria?'selected':''}"/>>----</option>
+						<option value="title" <c:out value="${info.search.criteria == 'title'?'selected':''}"/>>title</option>
+						<option value="content" <c:out value="${info.search.criteria=='content'?'selected':''}"/>>content</option>
+						<option value="name" <c:out value="${info.search.criteria=='name'?'selected':''}"/>>name</option>
 					</select>
-					<input type="text" name="keyword" value="${search.keyword }"/>
+					<input type="text" name="keyword" value="${info.search.keyword}"/>
 					<input type="button"  value="검색" class="btn btn-primary"/>	
 				</form>
 			</div>
@@ -42,7 +42,7 @@
 							&nbsp;
 						</c:forEach>
 					</c:if>
-					<a href="qHitUpdate.do?bno=${vo.bno}">${vo.title}</a>
+					<a href="qHitUpdate.do?bno=${vo.bno}&page=${info.search.page}&criteria=${info.search.criteria}&keyword=${info.search.keyword}">${vo.title}</a>
 				</td>
 				<td class='text-center'>${vo.name}</td><!--작성자-->
 				<td class='text-center'>${vo.regdate}</td><!--날짜-->
@@ -54,7 +54,26 @@
 			<div class="row  justify-content-md-center">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination"><!--하단의 페이지 나누기 부분-->
-				  
+				  <c:if test="${info.prev}">
+				  	<li class="page-item">
+				  	<a href="qList.do?page=${info.search.page-1}&criteria=${info.search.criteria}&keyword=${info.search.keyword}" class="page-link">이전</a>
+				  	</li>
+				  </c:if>
+				  <c:forEach begin="${info.startPage}" end="${info.endPage}" var="idx">
+				  		<c:choose>
+				  			<c:when test="${idx==info.search.page}">
+				  				<li class="page-item active"><a class="page-link">${idx}</a></li>
+				  			</c:when>
+				  			<c:otherwise>
+				  			<li class="page-item"><a class="page-link" href="qList.do?page=${info.search.page}&criteria=${info.search.criteria}&keyword=${info.search.keyword}">${idx}</a></li>
+				  			</c:otherwise>
+				  		</c:choose>
+				  </c:forEach>
+				  <c:if test="${info.next}">
+				  	<li class="page-item">
+				  		<a href="qList.do?page=${info.search.page+1}&criteria=${info.search.criteria}&keyword=${info.search.keyword}" class="page-link">다음</a>
+				  	</li>
+				  </c:if>
 				  </ul>
 				</nav>					
 			</div>

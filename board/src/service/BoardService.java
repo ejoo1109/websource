@@ -13,6 +13,8 @@ public interface BoardService {
 
 	//게시글 전체조회+검색 조회
 	public List<BoardVO> getList(SearchVO searchVO);
+	//게시글 전체 행 수
+	public int getRows(String criteria, String keyword);
 	//게시글 특정 번호 조회
 	public BoardVO getRow(int bno);
 	//조회수 업데이트
