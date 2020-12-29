@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+	<member>
+		<name>주영아</name>
+		<part>서버</part>
+	</member>
+	<member>
+		<name>홍길동</name>
+		<part>웹컨덴츠</part>
+	</member>
+	<member>
+		<name>서길동</name>
+		<part>웹퍼블리셔</part>
+	</member>
+
+</company>
