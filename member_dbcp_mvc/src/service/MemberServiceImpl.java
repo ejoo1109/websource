@@ -71,4 +71,11 @@ public class MemberServiceImpl implements MemberService {
 		return leaveFlag;
 	}
 
+	@Override
+	public boolean checkIdMember(String userid) {
+		boolean result = dao.checkId(userid);
+		close(con);		
+		return result;
+	}
+
 }

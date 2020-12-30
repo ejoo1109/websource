@@ -15,12 +15,19 @@ $(function(){
         userid :{ 
 			required:true,
             validId:true,//임의로 정한 규칙
-            rangelength:[5,12]
+			remote:{
+				url:"../checkId.do",
+				type:"post",
+				data:{
+					userid:function(){
+						return $("#userid").val();
+					}
+				}
+			}
         },
         password:{
 			required:true,
             validPwd : true,
-			rangelength:[8,12]
         },
         confirm_password:{
 			required:true,
@@ -29,7 +36,6 @@ $(function(){
         },
         name :{
 			required:true,
-			rangelength:[2,4]
 		},
         gender :{
             required : true
@@ -39,9 +45,11 @@ $(function(){
             email:true 
         }
 },
-	messages:{
+//규칙에 대한 메세지 정의
+	messages:{ 
 		userid :{ 
-			required:"아이디는 필수 입력 입니다."
+			required:"아이디는 필수 입력 입니다.",
+			remote:"아이디 사용 불가"
 	},
 		password :{ 
 			required:"비밀번호는 필수 입력 입니다."
@@ -87,4 +95,3 @@ $.validator.addMethod("email",function(value){
     let emailcheck = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/
     ;return emailcheck.test(value);
 },"이메일을 확인해 주세요");
-

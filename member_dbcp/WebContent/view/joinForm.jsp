@@ -6,7 +6,7 @@
 	<div class="form-group row justify-content-center">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-6">
-			<input type="text" name="userid" id="userid" class="form-control" placeholder="아이디를 입력하세요"/>
+			<input type="text" name="userid" id="userid" class="form-control" placeholder="아이디를 입력하세요" onchange="dupId()"/>
 			 <small id="userid" class="text-info"></small>
 		</div>
 	</div>
@@ -56,7 +56,28 @@
 	</div>
 </form>
 </div>
-
+<script>
+function dupId(){
+	//사용자가 입력한 userid 가져와서 서버로 보내기
+	var userid = $("#userid").val();
+	console.log(userid);
+	$.ajax({
+		url:"checkId.jsp",
+		type:"post",
+		data:{
+			userid:userid
+		},
+		success:function(data){
+			if($.trim(data)=="true"){//동일아이디가 있다면 true
+				alert("아이디는 사용 불가");
+			}else{
+				alert("아이디는 사용 가능");
+			}
+		}
+	})
+	
+}
+</script>
 <%-- 사용자 validate 코드 삽입하기 --%>
 <script src="../js/join.js"></script>
 <%@include file="../layout/footer.jsp" %>

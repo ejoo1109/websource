@@ -107,7 +107,27 @@ public class MemberDAO {
 		}finally {
 				close(pstmt);
 		}return result;
+	}
+	//중복아이디
+	public boolean checkId(String userid) {
+		boolean result = false;
 		
-		
+		String sql = "select userid from memberTBL where userid=?";
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+				close(rs);
+				close(pstmt);
+		}
+		return result;
 	}
 }
