@@ -21,7 +21,7 @@ public class MemberDAO {
 	public Connection getConnection() {
 			Connection con = null;
 		
-			String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 			String user= "javaDB";
 			String password = "12345";
 			

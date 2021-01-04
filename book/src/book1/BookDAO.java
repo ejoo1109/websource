@@ -20,7 +20,7 @@ public class BookDAO {
 	public Connection getConnection() {
 		Connection con = null;
 		try {
-			String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 			String user = "javaDB";
 			String password = "12345";
 			con= DriverManager.getConnection(url,user,password);

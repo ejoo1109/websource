@@ -25,7 +25,7 @@ public class UserDAO {
 	public Connection getConnection(){
 		Connection con = null;
 		try {
-			String url="jdbc:oracle:thin:@localhost:1522:orcl";
+			String url="jdbc:oracle:thin:@localhost:1521:orcl";
 			String user="javaDB";
 			String password="12345";	
 		//	return DriverManager.getConnection(url, user, password);
