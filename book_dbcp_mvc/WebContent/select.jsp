@@ -4,7 +4,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% //selectPro에서 셋한 list 가져와서 형변환
-	//List<BookVO> list =(List<BookVO>)request.getAttribute("list");
+	List<BookVO> list =(List<BookVO>)request.getAttribute("list");
+	if(list==null){
+		response.sendRedirect("list.do");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -78,3 +81,4 @@
 
 </body>
 </html>
+<%-- <%@include file = "footer.jsp" %> --%>

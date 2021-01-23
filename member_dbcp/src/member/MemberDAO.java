@@ -27,6 +27,7 @@ public class MemberDAO {
 			Connection con = null;
 		
 			try {
+				//JNDI경로
 				Context ctx=new InitialContext();
 				DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
 				con=ds.getConnection();

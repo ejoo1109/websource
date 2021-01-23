@@ -11,7 +11,7 @@
 	PreparedStatement pstmt=null;
 	try{	//no에 해당하는 user 삭제
 		Class.forName("oracle.jdbc.OracleDriver");
-		String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String user="javaDB";
 		String password="12345";
 		con = DriverManager.getConnection(url, user, password);

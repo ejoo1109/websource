@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="uploadResult.jsp" method="post" enctype="multipart/form-data">
+	<form action="uploadResult.jsp" method="post" enctype="multipart/form-data"> <!-- 파일업로드시 enctype필수지정 -->
 	<div>
 		<label for="">제목</label>
 		<input type="text" name="title" id ="title"/>

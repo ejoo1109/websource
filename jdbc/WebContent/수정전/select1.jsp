@@ -15,7 +15,7 @@
 	ResultSet rs = null;
 	try{
 		Class.forName("oracle.jdbc.OracleDriver");
-		String url = "jdbc:oracle:thin:@localhost:1522:orcl";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String user="javaDB";
 		String password="12345";
 		con = DriverManager.getConnection(url, user, password);

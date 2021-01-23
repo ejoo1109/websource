@@ -1,6 +1,14 @@
+<%@page import="java.util.List"%>
+<%@page import="domain.ProductVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% 
+	List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
+	if(list==null){
+		response.sendRedirect("list.do");
+	}
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +31,7 @@
 			<th scope="col">등록일자</th>
 			<th scope="col">추가작업</th>
 		</thead>
-		<tbody>					
+		<tbody>				
 			<!-- 내용 반복 시키는 곳 -->
 			<c:forEach var="vo" items="${list}">
 			<tr>

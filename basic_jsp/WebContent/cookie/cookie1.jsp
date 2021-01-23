@@ -21,4 +21,5 @@
 <h3>쿠키 데이터가 저장되었습니다.</h3>
 <a href="getCookie1.jsp">쿠키확인</a>
 </body>
+
 </html>

@@ -21,7 +21,7 @@ public class ProdActionFactory {
 			action=new ProdAddAction("list.do");
 		}else if(cmd.equals("/list.do")) {
 			action=new ProdListAction("product_list.jsp");
-	}
+		}
 		return action;
 }
 }

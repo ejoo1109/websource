@@ -14,13 +14,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!--1.표현식과 혼합해서 사용하기 -->
 	<h3>현재 시간은 <%=hour %> : <%=minute %> : <%=second %></h3>
 	<% if(hour >= 12) { %>
 	<h4>오후입니다.</h4>
-	<% }else{%>
+	<% } else { %>
 		<h4>오전 입니다.</h4>
 		<% } %>
-	}
+<!--2.표현식과 혼합해서 사용하기 -->
 	<% 
 	if(hour >=12){
 		out.print("<h4>오후입니다</h4>%");

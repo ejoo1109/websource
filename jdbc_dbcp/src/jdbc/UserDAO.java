@@ -17,7 +17,7 @@ public class UserDAO {
 // ~ DAO 클래스명 : 데이터베이스 작업을 담당하는 클래스를 뜻함
 //jdbc: 드라이버로드, 커넥션, CRUD(select, update, delete, insert)
 	
-	//드라이버로드
+	//1.드라이버로드
 //	static {
 //	try {
 //		Class.forName("oracle.jdbc.OracleDriver");
@@ -26,7 +26,7 @@ public class UserDAO {
 //	}
 //	}
 	
-	//커넥션
+	//2-3. DB연결문 생성 + 커넥션
 	public Connection getConnection(){
 		Connection con = null;
 		try {
@@ -48,7 +48,9 @@ public class UserDAO {
 		int result =0;
 		try {
 			if(con!=null){ //seq.nextval => 다음 고유번호를 자동생성//insert문의 select절에서만 사용가능
+				//4. sql 구문 생성
 				String sql="insert into userTBL values(userTBL_seq.nextval,?,?,?,?)";
+				//5. statement 생성후 전송 :DB연결을 통해 sql문을 수행해 주는 클래스
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, username);
 				pstmt.setInt(2, Integer.parseInt(birthyear));

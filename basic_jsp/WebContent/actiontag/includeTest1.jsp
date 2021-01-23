@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- html주석도 사용가능 -->
-	<%--jsp 주석--%>
+<h2>include 액션 테스트</h2>
+<!-- pageContext.include();와 같은개념 --> <!-- 하단에 includeTest2.jsp 내용이 포함된다.(제어권 이동x)  -->
+<jsp:include page="includeTest2.jsp"/>
 </body>
 </html>

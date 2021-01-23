@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>include 액션 테스트</h2>
-<!-- pageContext.include();와 같은개념 -->
-<jsp:include page="includeTest2.jsp"/>
+<!-- html주석도 사용가능 -->
+	<%--jsp 주석 : f12에 나오지 않음--%>
 </body>
 </html>

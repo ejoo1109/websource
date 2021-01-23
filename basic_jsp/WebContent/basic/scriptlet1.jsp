@@ -10,3 +10,4 @@
 	}
 /*	out.print(total); */
 %>
+<%=total%>
